@@ -1,0 +1,5 @@
+const particlesConfig = {
+
+}
+
+export particlesConfig;
