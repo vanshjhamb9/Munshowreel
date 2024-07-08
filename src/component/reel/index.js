@@ -13,7 +13,7 @@ const Section = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height:100%;
+  height: 100%;
   padding: 5rem 0;
   position: relative;
 `;
@@ -49,7 +49,7 @@ const Carousal = styled.div`
   }
   .slick-slider .slick-arrow:before {
     color: #E0B0FF;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     @media only Screen and (max-width: 40em) {
       display: none;
     }
@@ -88,6 +88,72 @@ const VideoSubtitle = styled.p`
   margin-top: 0.5rem;
 `;
 
+const Arrow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #E0B0FF;
+  font-size: 2.5rem;
+  cursor: pointer;
+  border:2px;
+  border-color:#E0B0FF;
+  position: absolute;
+
+`;
+
+const ArrowTitle = styled.div`
+  font-size: 0.75rem; /* Smaller font size */
+  color: #E0B0FF;
+  margin-top: 0.5rem;
+  text-align: start; /* Center align text */
+  white-space: nowrap;
+  position: absolute;
+  top: 220%; 
+  left: -18px;
+
+  @media only screen and (max-width: 40em) {
+    display: none;
+  }
+`;
+
+
+const NextArrow = (props) => {
+  const { className, style, onClick, nextTitle } = props;
+  return (
+    <Arrow className={className} style={{ ...style, display: "block" }} onClick={onClick}>
+      <ArrowTitle>{nextTitle}</ArrowTitle>
+    </Arrow>
+  );
+};
+
+const PrevArrow = (props) => {
+  const { className, style, onClick, prevTitle } = props;
+  return (
+    <Arrow className={className} style={{ ...style, display: "block" }} onClick={onClick}>
+      <ArrowTitle>{prevTitle}</ArrowTitle>
+    </Arrow>
+  );
+};
+
+const videos = [
+  {
+    id: "BzFUNL_hYoQ",
+    title: "Animation",
+    description: "Learn about my video editing services.",
+  },
+  {
+    id: "Fq2ESwvwNo8",
+    title: "Video Editing",
+    description: "Discover my creative graphic design work.",
+  },
+  {
+    id: "T4Ls_WlLLMk",
+    title: "Graphic Design",
+    description: "Explore my captivating animation projects.",
+  },
+];
+
 const Reels = () => {
   const sliderRef = useRef(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -107,25 +173,10 @@ const Reels = () => {
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <NextArrow nextTitle={videos[(currentVideoIndex + 1) % videos.length].title} />,
+    prevArrow: <PrevArrow prevTitle={videos[(currentVideoIndex - 1 + videos.length) % videos.length].title} />,
+    beforeChange: (oldIndex, newIndex) => setCurrentVideoIndex(newIndex),
   };
-
-  const videos = [
-    {
-      id: "BzFUNL_hYoQ",
-      title: "Video Editing",
-      description: "Learn about our video editing services.",
-    },
-    {
-      id: "Fq2ESwvwNo8",
-      title: "Graphic Design",
-      description: "Discover our creative graphic design work.",
-    },
-    {
-      id: "T4Ls_WlLLMk",
-      title: "Animation",
-      description: "Explore our captivating animation projects.",
-    },
-  ];
 
   const updateVideoSize = () => {
     if (window.innerWidth <= 600) {
@@ -168,7 +219,7 @@ const Reels = () => {
   }, []);
 
   return (
-    <Section className="relative md:top-[0.2rem] sm:top-[10rem] xs:top-[24rem] xs:h-[10rem] xs:mb-[20rem] max-h-max-content" >
+    <Section className="relative md:top-[0.2rem] sm:top-[10rem] xs:top-[24rem] xs:h-[10rem] xs:mb-[20rem] max-h-max-content">
       <Title id="reels" className="text-richblack-100 mb-[5rem]">Showreel</Title>
       <Carousal className="relative z-10 mt-8 sm:w-[5rem] xs:w-[6rem]">
         <Slider ref={sliderRef} {...settings}>
@@ -176,7 +227,7 @@ const Reels = () => {
             <VideoContainer key={index}>
               <YouTube videoId={video.id} opts={opts} />
               <div className="w-full flex flex-col mx-auto justify-center items-center p-4 align-items-center place-items-center">
-                <VideoTitle className="relative font-semibold font-mono sm:font-[1.5rem] ">{video.title}</VideoTitle>
+                <VideoTitle className="relative font-semibold font-mono sm:font-[1.5rem]">{video.title}</VideoTitle>
                 <VideoSubtitle className="justify-center font-inter">{video.description}</VideoSubtitle>
               </div>
             </VideoContainer>

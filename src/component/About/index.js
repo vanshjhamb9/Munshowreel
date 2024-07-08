@@ -96,8 +96,8 @@ const About = () => {
             <CurvedLine />
           </div>
           <div ref={aboutTextRef} className={isVisible ? "is-visible flex flex-col-reverse sm:flex-col z-100 relative xs:flex-col gap-[8rem] text-center items-center md:w-[100%] sm:w-screen xs:w-screen" : "flex flex-col-reverse sm:flex-col z-100 relative xs:flex-col gap-[8rem] text-center items-center md:w-[100%] sm:w-screen xs:w-screen"}>
-            <div className="absolute md:-left-[15rem] sm:-left-[22rem] -top-[20rem] z-100 opacity-[100%] transition-all duration-500 ease-in-out lg:scale-100 md:scale-75 sm:-scale-75 xs:-scale-75  mx-auto justify-items-center">
-              <Spline scene="https://prod.spline.design/OVR-EQB4hYf40mxP/scene.splinecode" />
+            <div className="absolute md:-left-[5rem] sm:-left-[22rem] -top-[12rem] z-100 opacity-[100%] transition-all duration-500 ease-in-out lg:scale-100 md:scale-75 sm:-scale-75 xs:-scale-75  mx-auto justify-items-center">
+            <Spline scene="https://prod.spline.design/i6FyJ1raxm5Z-k0e/scene.splinecode" />
             </div>
             <AboutText className={isVisible ? "is-visible mt-[35rem] justify-items-start mx-auto md:w-[50rem] sm:w-[20rem] xs:w-[20rem]" : "mt-[20rem] justify-items-start mx-auto w-[50rem]"}>
               <div className="flex flex-col justify-items-start gap-8 w-[100%] z-100">
