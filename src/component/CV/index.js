@@ -65,7 +65,7 @@ const Resume = () => {
       <Info className='text-richblack-100 font-inter'>
         Interested in my work? Download my CV to see more about my skills, experience, and the projects I have worked on. I am always excited to collaborate on new projects and bring creative ideas to life.
       </Info>
-      <ButtonContainer>
+      <ButtonContainer className='flex lg:flex-row md:flex-row sm:flex-col xs:flex-col md:space-y-[0rem] xs:space-y-[1rem] ' >
         <Button
           className='bg-[#CF9FFF] text-richblack-900 font-semibold font-mono hover:bg-richblack-800 hover:text-richblack-100'
           href="https://drive.google.com/uc?export=download&id=143OamcyDqJD63af2B4eYnpNDEKOIbW52"
