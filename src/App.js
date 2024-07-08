@@ -2,14 +2,15 @@ import './App.css';
 import Spline from '@splinetool/react-spline';
 import Header from './Header';
 import { GlobalStyle } from "./globalStyles";
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import styled, { keyframes } from "styled-components";
 import { useRef, useState } from "react";
 import About from './component/About';
 import { ReactTyped as Typed } from 'react-typed';
 import Reels from './component/reel';
 import ParticlesComponent from './component/ParticleComponent';
-import Resume from './component/CV/index';
+import LinearBuffer from './component/LinearBuffer';
+
 
 const move = keyframes`
 0% { transform: translateY(-5px)  }
@@ -178,10 +179,26 @@ const handleClick = (id, e) => {
   setClick(!click);
   scrollUp(id, e);
 };
+
+const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a data fetching process
+    const fetchData = async () => {
+      // Mocking data fetching with a timeout
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
   
   return (
     <>
     <div class="App" className="w-full max-w-screen h-max-content overflow-x-hidden py-[2rem] relative min-h-screen bg-[#303030] flex flex-col font-inter">
+    <LinearBuffer isLoading={isLoading} />
+    {!isLoading && (
+      <>
     <ParticlesComponent id="Particles" />
     
       <Suspense fallback={null}>
@@ -220,9 +237,9 @@ const handleClick = (id, e) => {
 
 <About />
 <div className='relative w-full'>
-<Icons className="absolute opacity-[50%] md:-top-[4rem] sm:top-[10rem] xs:top-[19rem] -left-[52rem] mx-auto justify-items-center transition-all ease-in-out duration-600 lg:scale-100 md:scale-75 sm:scale-50 xs:-scale-25 ">
+{/* <Icons className="absolute opacity-[50%] md:-top-[4rem] sm:top-[10rem] xs:top-[19rem] -left-[52rem] mx-auto justify-items-center transition-all ease-in-out duration-600 lg:scale-100 md:scale-75 sm:scale-50 xs:-scale-25 ">
       <Spline  scene="https://prod.spline.design/xVrFWjeSeDnIAdjG/scene.splinecode" />
-      </Icons>
+      </Icons> */}
       <div id="Videos" className='absolute  md:top-[50rem] sm:top-[60rem] xs:top-[80rem]'></div>
 <Reels id="reels" />
 
@@ -231,9 +248,9 @@ const handleClick = (id, e) => {
 
 
     </Suspense>
+</>
 
-
-      
+    )}
     </div>
     </>
   );
